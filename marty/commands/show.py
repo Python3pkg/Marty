@@ -37,7 +37,7 @@ class ShowTree(Command):
             type = details.pop('type', '')
             ref = details.pop('ref', '')
             fmt = '<color fg=green>%s</color>:<color fg=cyan>%s</color>'
-            attributes = ' '.join(fmt % (k, v) for k, v in sorted(details.items(), key=tree_attr_sorter))
+            attributes = ' '.join(fmt % (k, v) for k, v in sorted(list(details.items()), key=tree_attr_sorter))
             table_lines.append((name, type, ref, attributes))
 
         printer.table(table_lines)
@@ -70,7 +70,7 @@ class ShowBackup(Command):
 
             printer.p('<b>{n} errors:</b>', n=len(backup.errors))
             printer.p()
-            for filename, error in backup.errors.items():
+            for filename, error in list(backup.errors.items()):
                 printer.p(' - <b>{fn}</b>: {error}', fn=filename.decode('utf-8', 'replace'), error=error)
         printer.p()
         printer.p('-' * 80)
@@ -100,11 +100,11 @@ class RecursivelyShowTree(Command):
         last = False
         next_level = level + (True,)
 
-        for i, (name, item) in enumerate(tree.items()):
+        for i, (name, item) in enumerate(list(tree.items())):
             if len(tree) == i + 1:
                 last = True
                 next_level = level + (False,)
-            header = ''.join([u'│   ' if x else '    ' for x in level])
+            header = ''.join(['│   ' if x else '    ' for x in level])
             if last:
                 header += '└── '
             else:

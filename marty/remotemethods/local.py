@@ -69,7 +69,7 @@ class Local(RemoteMethod):
     def put_tree(self, tree, path):
         path = path.lstrip(os.sep.encode('utf-8'))
         directory = os.path.join(self.root, path)
-        for name, item in tree.items():
+        for name, item in list(tree.items()):
             fullname = os.path.join(directory, name)
             try:
                 fstat = os.lstat(fullname)

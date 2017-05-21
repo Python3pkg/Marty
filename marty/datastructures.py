@@ -142,7 +142,7 @@ class Tree(MsgPackMartyObject):
     def items(self):
         """ Returns a sorted pair of (name, details) of items.
         """
-        return sorted(self._items.items(), key=lambda x: x[0])
+        return sorted(list(self._items.items()), key=lambda x: x[0])
 
     def from_msgpack(self, parsed):
         self._items = {k: TreeItem(v) for k, v in parsed}
@@ -152,7 +152,7 @@ class Tree(MsgPackMartyObject):
         # a distinguished output (same item list always produce the exact
         # same output once serialized).
         items = []
-        for name, item in sorted(self._items.items(), key=lambda x: x[0]):
+        for name, item in sorted(list(self._items.items()), key=lambda x: x[0]):
             item = list(sorted(item.items()))
             items.append((name, item))
 

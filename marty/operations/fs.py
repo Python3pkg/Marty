@@ -104,7 +104,7 @@ class MartyFSHandler(llfuse.Operations):
         elif attrs['type'] != 'tree':
             raise llfuse.FUSEError(errno.ENOENT)
 
-        for i, (name, item) in enumerate(attrs['tree'].items()):
+        for i, (name, item) in enumerate(list(attrs['tree'].items())):
             if offset > i:
                 continue
 

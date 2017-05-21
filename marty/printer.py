@@ -216,7 +216,7 @@ class MartyPrinter(object):
             self.p('[{indice}] ' + text, indice=i + 1, **args)
         self.p('')
         while True:
-            chosen = input('Choice [1-{0}]? '.format(len(choices)))
+            chosen = eval(input('Choice [1-{0}]? '.format(len(choices))))
             if chosen.isdigit() and 1 <= int(chosen) <= len(choices):
                 return choices[int(chosen) - 1][0]
 

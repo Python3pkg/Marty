@@ -50,7 +50,7 @@ def walk_and_ingest_remote(remote, storage, path=b'/', parent=None):
     if MARTY_EXCLUDE in tree:
         tree = Tree()
 
-    for filename, item in tree.items():
+    for filename, item in list(tree.items()):
         fullname = os.path.join(path, filename)
         if not remote.policy.included(fullname):
             # Skip excluded paths

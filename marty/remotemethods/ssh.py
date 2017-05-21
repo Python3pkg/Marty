@@ -153,7 +153,7 @@ class SSH(BaseSSH):
 
         directory_stats = {x.filename: x for x in self._sftp.listdir_attr_b(directory)}
 
-        for name, item in tree.items():
+        for name, item in list(tree.items()):
             fullname = os.path.join(directory, name)
             fstat = directory_stats.get(name)
 

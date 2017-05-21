@@ -52,7 +52,7 @@ class Backup(Command):
 
             printer.p('<b>{n} errors:</b>', n=len(backup.errors))
             printer.p()
-            for filename, error in backup.errors.items():
+            for filename, error in list(backup.errors.items()):
                 printer.p(' - <b>{fn}</b>: {error}', fn=filename.decode('utf-8', 'replace'), error=error)
 
         if args.stats:
